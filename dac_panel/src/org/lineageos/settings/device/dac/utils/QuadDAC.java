@@ -91,9 +91,10 @@ public class QuadDAC {
         return SystemProperties.getInt(Constants.PROPERTY_HIFI_DAC_MODE, 0);
     }
 
+    /* We now have to workaround android's SeekBar being unable to go below 0 (so it now goes from 24 to 0) */
     public static void setAVCVolume(int avc_volume)
     {
-        FileUtils.writeLine(Constants.AVC_VOLUME_SYSFS, (avc_volume * -1) + "");
+        FileUtils.writeLine(Constants.AVC_VOLUME_SYSFS, ((avc_volume-24) * -1) + "");
         SystemProperties.set(Constants.PROPERTY_HIFI_DAC_AVC_VOLUME, Integer.toString(avc_volume));
     }
 
@@ -146,12 +147,14 @@ public class QuadDAC {
     /* 
      * This method should not write to sysfs on its own, as it can be called multiple times in sequence.
      * 
-     * Use "applyCustomFilterCoeffs" instead whenever you want to apply them all at once. 
+     * Use "applyCustomFilterCoeffs" instead whenever you want to apply them all at once.
      */
     public static void setCustomFilterCoeff(int coeffIndex, int coeff_val) {
         SystemProperties.set(Constants.PROPERTY_CUSTOM_FILTER_COEFFS[coeffIndex], Integer.toString(coeff_val));
     }
-
+    /*
+     * Note: Like AVC, this one now has to adapt to android's SeekBarPreference being unable to go below 0 
+     */
     public static int getCustomFilterCoeff(int coeffIndex) {
         return SystemProperties.getInt(Constants.PROPERTY_CUSTOM_FILTER_COEFFS[coeffIndex], 0);
     }
@@ -205,7 +208,8 @@ public class QuadDAC {
         temp_string.append(SystemProperties.getInt(Constants.PROPERTY_CUSTOM_FILTER_SHAPE, 0)).append(",");
         temp_string.append(SystemProperties.getInt(Constants.PROPERTY_CUSTOM_FILTER_SYMMETRY, 0)).append(",");
         for(int i = 0; i < 14; i++) {
-            temp_string.append(SystemProperties.getInt(Constants.PROPERTY_CUSTOM_FILTER_COEFFS[i], 0));
+            /* We need to work around the  */
+            temp_string.append(SystemProperties.getInt(Constants.PROPERTY_CUSTOM_FILTER_COEFFS[i], 0) - 9999999);
             if(i < 13) /* Last element doesn't need to have a comma appended after it */
                 temp_string.append(",");
         }

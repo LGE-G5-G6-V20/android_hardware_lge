@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-                  xmlns:asp="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:title="@strings/quad_dac">
 
     <SwitchPreference
         android:key="quaddac_switch"
@@ -22,9 +24,9 @@
             android:key="avc_volume_seekbar"
             android:title="@string/avc_volume"
             android:summary="@string/avc_volume_summary"
-            asp:min="-24"
-            android:max="0"
-            android:defaultValue="-14" />
+            android:min="0"
+            android:max="24"
+            android:defaultValue="14" />
 
         <ListPreference
             android:key="digital_filter_dropdown"
@@ -65,99 +67,99 @@
             android:key="custom_filter_coeff0"
             android:title=""
             android:summary="%s"
-            asp:min="-9999999"
-            android:max="9999999"
+            android:min="0"
+            android:max="19999998"
             android:defaultValue="0" />
         <SeekBarPreference
             android:key="custom_filter_coeff1"
             android:title=""
             android:summary="%s"
-            asp:min="-9999999"
-            android:max="9999999"
+            android:min="0"
+            android:max="19999998"
             android:defaultValue="0" />
         <SeekBarPreference
             android:key="custom_filter_coeff2"
             android:title=""
             android:summary="%s"
-            asp:min="-9999999"
-            android:max="9999999"
+            android:min="0"
+            android:max="19999998"
             android:defaultValue="0" />
         <SeekBarPreference
             android:key="custom_filter_coeff3"
             android:title=""
             android:summary="%s"
-            asp:min="-9999999"
-            android:max="9999999"
+            android:min="0"
+            android:max="19999998"
             android:defaultValue="0" />
         <SeekBarPreference
             android:key="custom_filter_coeff4"
             android:title=""
             android:summary="%s"
-            asp:min="-9999999"
-            android:max="9999999"
+            android:min="0"
+            android:max="19999998"
             android:defaultValue="0" />
         <SeekBarPreference
             android:key="custom_filter_coeff5"
             android:title=""
             android:summary="%s"
-            asp:min="-9999999"
-            android:max="9999999"
+            android:min="0"
+            android:max="19999998"
             android:defaultValue="0" />
         <SeekBarPreference
             android:key="custom_filter_coeff6"
             android:title=""
             android:summary="%s"
-            asp:min="-9999999"
-            android:max="9999999"
+            android:min="0"
+            android:max="19999998"
             android:defaultValue="0" />
         <SeekBarPreference
             android:key="custom_filter_coeff7"
             android:title=""
             android:summary="%s"
-            asp:min="-9999999"
-            android:max="9999999"
+            android:min="0"
+            android:max="19999998"
             android:defaultValue="0" />
         <SeekBarPreference
             android:key="custom_filter_coeff8"
             android:title=""
             android:summary="%s"
-            asp:min="-9999999"
-            android:max="9999999"
+            android:min="0"
+            android:max="19999998"
             android:defaultValue="0" />
         <SeekBarPreference
             android:key="custom_filter_coeff9"
             android:title=""
             android:summary="%s"
-            asp:min="-9999999"
-            android:max="9999999"
+            android:min="0"
+            android:max="19999998"
             android:defaultValue="0" />
         <SeekBarPreference
             android:key="custom_filter_coeff10"
             android:title=""
             android:summary="%s"
-            asp:min="-9999999"
-            android:max="9999999"
+            android:min="0"
+            android:max="19999998"
             android:defaultValue="0" />
         <SeekBarPreference
             android:key="custom_filter_coeff11"
             android:title=""
             android:summary="%s"
-            asp:min="-9999999"
-            android:max="9999999"
+            android:min="0"
+            android:max="19999998"
             android:defaultValue="0" />
         <SeekBarPreference
             android:key="custom_filter_coeff12"
             android:title=""
             android:summary="%s"
-            asp:min="-9999999"
-            android:max="9999999"
+            android:min="0"
+            android:max="19999998"
             android:defaultValue="0" />
         <SeekBarPreference
             android:key="custom_filter_coeff13"
             android:title=""
             android:summary="%s"
-            asp:min="-9999999"
-            android:max="9999999"
+            android:min="0"
+            android:max="19999998"
             android:defaultValue="0" />
 
         <!-- Tons of coefficient seekbars END -->

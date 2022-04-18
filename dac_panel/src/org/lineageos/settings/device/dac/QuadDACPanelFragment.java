@@ -12,7 +12,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemProperties;
 import androidx.preference.PreferenceFragment;
+import android.provider.Settings;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceFragment;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.SwitchPreference;
 import androidx.preference.ListPreference;
@@ -197,7 +200,7 @@ public class QuadDACPanelFragment extends PreferenceFragment
 
     public static void setCoeffSummary(int index, int value) {
         custom_filter_coeffs[index].setValue(value);
-        custom_filter_coeffs[index].setSummary("Coefficient " + index + " : 0." + value);
+        custom_filter_coeffs[index].setSummary("Coefficient " + index + " : 0." + (value-9999999));
     }
 
     @Override
@@ -340,17 +343,6 @@ public class QuadDACPanelFragment extends PreferenceFragment
             if(QuadDAC.isEnabled())
                 quaddac_switch.setChecked(true);
         }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                getActivity().finish();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     private void enableExtraSettings()
