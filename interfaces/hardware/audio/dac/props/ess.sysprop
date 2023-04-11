@@ -1,0 +1,48 @@
+owner: Platform
+module: "lge.sysprop.EssProperties"
+prop {
+    api_name: "ess_supported"
+    type: Boolean
+    prop_name: "ro.audio.ess.supported"
+    scope: Public
+    access: Readonly
+}
+prop {
+    api_name: "hifi_enabled"
+    type: Boolean
+    prop_name: "persist.audio.hifi.enabled"
+    scope: Public
+    access: ReadWrite
+}
+prop {
+    api_name: "ess_high_impedence"
+    type: Boolean
+    enum_values: "x|y|z"
+    prop_name: "persist.audio.ess.impedence"
+    scope: Public
+    access: ReadWrite
+}
+prop {
+    api_name: "ess_bitrate"
+    type: Enum
+    enum_values: "x|y|z"
+    prop_name: "persist.audio.ess.bitrate"
+    scope: Public
+    access: ReadWrite
+}
+prop {
+    api_name: "ess_filter"
+    type: Enum
+    enum_values: "x|y|z"
+    prop_name: "persist.audio.ess.filter"
+    scope: Public
+    access: ReadWrite
+}
+prop {
+    api_name: "ess_preset"
+    type: Enum
+    enum_values: "x|y|z"
+    prop_name: "persist.audio.ess.preset"
+    scope: Public
+    access: ReadWrite
+}
