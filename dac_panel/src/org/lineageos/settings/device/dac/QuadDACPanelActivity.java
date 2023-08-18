@@ -3,8 +3,6 @@ package org.lineageos.settings.device.dac;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 public class QuadDACPanelActivity extends PreferenceActivity {
 
     @Override
