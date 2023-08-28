@@ -75,6 +75,12 @@ public class QuadDAC {
         case 2:
             SystemProperties.set(Constants.PROPERTY_ESS_MODE, "2");
             break;
+        case 3:
+            SystemProperties.set(Constants.PROPERTY_ESS_MODE, "3");
+            break;
+        case 4:
+            SystemProperties.set(Constants.PROPERTY_ESS_MODE, "4");
+            break;
         default: 
             return;
         }

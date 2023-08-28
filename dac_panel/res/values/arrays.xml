@@ -20,6 +20,8 @@
         <item>@string/hifi_mode_normal</item>
         <item>@string/hifi_mode_him</item>
         <item>@string/hifi_mode_aux-him</item>
+        <item>@string/hifi_mode_him-24bit</item>
+        <item>@string/hifi_mode_aux-him-24bit</item>
     </string-array>
 
     <string-array name="custom_filter_shapes" translatable="false">
