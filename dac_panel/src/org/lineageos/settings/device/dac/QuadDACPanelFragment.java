@@ -262,7 +262,6 @@ public class QuadDACPanelFragment extends PreferenceFragment
         custom_filter_reset_coeffs_button.setEnabled(true);
 
         /* To apply the custom filter's settings */
-        QuadDAC.setDigitalFilter(QuadDAC.getDigitalFilter());
         QuadDAC.setCustomFilterShape(QuadDAC.getCustomFilterShape());
     }
 
