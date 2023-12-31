@@ -990,20 +990,16 @@ static void set_ess_backend(snd_device_t snd_device){
         ALOGD("%s: Restoring WCD backend \n", __func__);
         platform_set_snd_device_backend(snd_device, "headphones", "SLIMBUS_6_RX");  //Needed as a workaround, refer to main func.
         }
-        else if (snd_device == SND_DEVICE_OUT_HEADPHONES_HIFI_DAC) {
+        else if ((snd_device == SND_DEVICE_OUT_HEADPHONES_HIFI_DAC) || 
+        (snd_device == SND_DEVICE_OUT_HEADPHONES_HIFI_DAC_ADVANCED) || 
+        (snd_device == SND_DEVICE_OUT_HEADPHONES_HIFI_DAC_AUX) ||
+        (snd_device == SND_DEVICE_OUT_HEADPHONES_HIFI_DAC_ADVANCED_24BIT) ||
+        (snd_device == SND_DEVICE_OUT_HEADPHONES_HIFI_DAC_AUX_24BIT)){
         ALOGD("%s: Setting ESS hifi backend \n", __func__); 
         platform_set_snd_device_backend(snd_device, "headphones tert-mi2s-headphones", "SEC_MI2S_RX");
         }
-        else if (snd_device == SND_DEVICE_OUT_HEADPHONES_HIFI_DAC_ADVANCED) {
-        ALOGD("%s: Setting ESS hifi advanced backend \n", __func__); 
-        platform_set_snd_device_backend(snd_device, "headphones tert-mi2s-headphones", "SEC_MI2S_RX");
-        }
-        else if (snd_device == SND_DEVICE_OUT_HEADPHONES_HIFI_DAC_AUX) {
-        ALOGD("%s: Setting ESS hifi aux backend \n", __func__); 
-        platform_set_snd_device_backend(snd_device, "headphones tert-mi2s-headphones", "SEC_MI2S_RX");
-        }
         else { ALOGD("%s: Not an ess hifi scenario \n", __func__); }
-        }
+    }
 }
         
         
@@ -1032,6 +1028,16 @@ static void check_and_enable_ess_hifi(struct audio_device *adev, struct audio_us
 		        usecase->out_snd_device = SND_DEVICE_OUT_HEADPHONES_HIFI_DAC_AUX;
 		        audio_route_apply_and_update_path(adev->audio_route, "ess-headphones-hifi-aux");
 		        ALOGD("%s: Setting aux ESS hifi mode \n", __func__);
+		        break;
+		    case 3:
+		        usecase->out_snd_device = SND_DEVICE_OUT_HEADPHONES_HIFI_DAC_ADVANCED_24BIT;
+		        audio_route_apply_and_update_path(adev->audio_route, "ess-headphone-hifi-advanced-24bit");
+		        ALOGD("%s: Setting advanced 24BIT ESS hifi mode \n", __func__);
+		        break;
+		    case 4:
+		        usecase->out_snd_device = SND_DEVICE_OUT_HEADPHONES_HIFI_DAC_AUX_24BIT;
+		        audio_route_apply_and_update_path(adev->audio_route, "ess-headphone-hifi-aux-24bit");
+		        ALOGD("%s: Setting aux 24BIT ESS hifi mode \n", __func__);
 		        break;
 		    default:
 		        usecase->out_snd_device = SND_DEVICE_OUT_HEADPHONES_HIFI_DAC;
