@@ -481,6 +481,9 @@ static const char * device_table[SND_DEVICE_MAX] = {
     [SND_DEVICE_OUT_HEADPHONES_HIFI_DAC] = "ess-headphones-hifi",
     [SND_DEVICE_OUT_HEADPHONES_HIFI_DAC_ADVANCED] = "ess-headphones-hifi-advanced",
     [SND_DEVICE_OUT_HEADPHONES_HIFI_DAC_AUX] = "ess-headphones-hifi-aux",
+    [SND_DEVICE_OUT_HEADPHONES_HIFI_DAC_AUX_24BIT] = "ess-headphone-hifi-aux-24bit",
+    [SND_DEVICE_OUT_HEADPHONES_HIFI_DAC_ADVANCED_24BIT] = "ess-headphone-hifi-advanced-24bit",
+
 
     /* Capture sound devices */
     [SND_DEVICE_IN_HANDSET_MIC] = "handset-mic",
@@ -624,6 +627,8 @@ static int acdb_device_table[SND_DEVICE_MAX] = {
     [SND_DEVICE_OUT_HEADPHONES_HIFI_DAC] = 10,
     [SND_DEVICE_OUT_HEADPHONES_HIFI_DAC_ADVANCED] = 10,
     [SND_DEVICE_OUT_HEADPHONES_HIFI_DAC_AUX] = 10,
+    [SND_DEVICE_OUT_HEADPHONES_HIFI_DAC_AUX_24BIT] = 10,
+    [SND_DEVICE_OUT_HEADPHONES_HIFI_DAC_ADVANCED_24BIT] = 10,
     
     [SND_DEVICE_OUT_SPEAKER_AND_LINE] = 10,
     [SND_DEVICE_OUT_SPEAKER_AND_HEADPHONES_EXTERNAL_1] = 130,
@@ -795,6 +800,8 @@ static struct name_to_index snd_device_name_index[SND_DEVICE_MAX] = {
     {TO_NAME_INDEX(SND_DEVICE_OUT_HEADPHONES_HIFI_DAC)},
     {TO_NAME_INDEX(SND_DEVICE_OUT_HEADPHONES_HIFI_DAC_ADVANCED)},
     {TO_NAME_INDEX(SND_DEVICE_OUT_HEADPHONES_HIFI_DAC_AUX)},
+    {TO_NAME_INDEX(SND_DEVICE_OUT_HEADPHONES_HIFI_DAC_AUX_24BIT)},
+    {TO_NAME_INDEX(SND_DEVICE_OUT_HEADPHONES_HIFI_DAC_ADVANCED_24BIT)},
     
     {TO_NAME_INDEX(SND_DEVICE_OUT_LINE)},
     {TO_NAME_INDEX(SND_DEVICE_OUT_SPEAKER_AND_HEADPHONES)},
@@ -1319,6 +1326,12 @@ void platform_set_echo_reference(struct audio_device *adev, bool enable,
         else if (adev->snd_dev_ref_cnt[	SND_DEVICE_OUT_HEADPHONES_HIFI_DAC_AUX] > 0)
             strlcat(ec_ref_mixer_path, " ess-headphones-hifi-aux",
                     MIXER_PATH_MAX_LENGTH);
+        else if (adev->snd_dev_ref_cnt[	SND_DEVICE_OUT_HEADPHONES_HIFI_DAC_AUX_24BIT] > 0)
+            strlcat(ec_ref_mixer_path, " ess-headphone-hifi-aux-24bit",
+                    MIXER_PATH_MAX_LENGTH);
+        else if (adev->snd_dev_ref_cnt[	SND_DEVICE_OUT_HEADPHONES_HIFI_DAC_ADVANCED_24BIT] > 0)
+            strlcat(ec_ref_mixer_path, " ess-headphone-hifi-advanced-24bit",
+                    MIXER_PATH_MAX_LENGTH);
         else if (adev->snd_dev_ref_cnt[SND_DEVICE_OUT_SPEAKER_VBAT] > 0)
             strlcat(ec_ref_mixer_path, " speaker-vbat",
                     MIXER_PATH_MAX_LENGTH);
@@ -1598,6 +1611,8 @@ static void set_platform_defaults(struct platform_data * my_data)
     hw_interface_table[SND_DEVICE_OUT_HEADPHONES_HIFI_DAC] = strdup("SEC_MI2S_RX");
     hw_interface_table[SND_DEVICE_OUT_HEADPHONES_HIFI_DAC_ADVANCED] = strdup("SEC_MI2S_RX");
     hw_interface_table[SND_DEVICE_OUT_HEADPHONES_HIFI_DAC_AUX] = strdup("SEC_MI2S_RX");
+    hw_interface_table[SND_DEVICE_OUT_HEADPHONES_HIFI_DAC_AUX_24BIT] = strdup("SEC_MI2S_RX");
+    hw_interface_table[SND_DEVICE_OUT_HEADPHONES_HIFI_DAC_ADVANCED_24BIT] = strdup("SEC_MI2S_RX");
     
     hw_interface_table[SND_DEVICE_OUT_HEADPHONES] = strdup("SLIMBUS_6_RX");
     hw_interface_table[SND_DEVICE_OUT_HEADPHONES_DSD] = strdup("SLIMBUS_2_RX");
@@ -3531,6 +3546,12 @@ int platform_get_backend_index(snd_device_t snd_device)
                         port = ESS_HEADPHONE_BACKEND;
                 else if (strncmp(backend_tag_table[snd_device], "headphones tert-mi2s-headphones",
                             sizeof("ess-headphones-hifi-aux")) == 0)
+                        port = ESS_HEADPHONE_BACKEND;
+                else if (strncmp(backend_tag_table[snd_device], "headphones tert-mi2s-headphones",
+                            sizeof("ess-headphone-hifi-advanced-24bit")) == 0)
+                        port = ESS_HEADPHONE_BACKEND;
+                else if (strncmp(backend_tag_table[snd_device], "headphones tert-mi2s-headphones",
+                            sizeof("ess-headphone-hifi-aux-24bit")) == 0)
                         port = ESS_HEADPHONE_BACKEND;
                 else if (strcmp(backend_tag_table[snd_device], "hdmi") == 0)
                         port = HDMI_RX_BACKEND;

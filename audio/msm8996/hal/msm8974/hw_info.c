@@ -214,6 +214,8 @@ static const snd_device_t ess_audio_devices[] = {
     SND_DEVICE_OUT_HEADPHONES_HIFI_DAC,
     SND_DEVICE_OUT_HEADPHONES_HIFI_DAC_ADVANCED,
     SND_DEVICE_OUT_HEADPHONES_HIFI_DAC_AUX,
+    SND_DEVICE_OUT_HEADPHONES_HIFI_DAC_AUX_24BIT,
+    SND_DEVICE_OUT_HEADPHONES_HIFI_DAC_ADVANCED_24BIT,
 };
 
 static const snd_device_t tavil_qrd_variant_devices[] = {
