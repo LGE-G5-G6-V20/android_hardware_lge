@@ -38,22 +38,36 @@ extern int transmitIr(const char *dev, int baudRate, int frequency, int pattern[
 }
 
 static hidl_vec<ConsumerIrFreqRange> rangeVec{
-    {.min = 30000, .max = 30000},
-    {.min = 33000, .max = 33000},
-    {.min = 36000, .max = 36000},
-    {.min = 38000, .max = 38000},
-    {.min = 40000, .max = 40000},
-    {.min = 56000, .max = 56000},
+    {.min = 25000, .max = 125000},
+};
+
+enum LG_TRANSMIT_IR_RETURN_CODES {
+    IR_SUCCESS,
+    IR_FAIL,
+    IR_INVALID_PORT,
+    IR_INVALID_BAUDRATE,
+    IR_ERROR_OPEN_PORT,
+    IR_ERROR_WRITE,
+    IR_ERROR_READ,
+    IR_INVALID_DATA_SIZE,
+    IR_INVALID_DATA,
+    IR_MAX_DURATIONS_EXCEEDED
 };
 
 ConsumerIr::ConsumerIr() {}
 
 Return<bool> ConsumerIr::transmit(int32_t carrierFreq, const hidl_vec<int32_t>& pattern) {
     size_t entries = pattern.size();
+    int rc;
 
     // call into libcir_driver
     ALOGD("transmitting pattern at %d Hz", carrierFreq);
-    return transmitIr(IR_DEVICE, LG_IR_BAUD_RATE, carrierFreq, const_cast<int32_t*>(pattern.data()), sizeof(int32_t) * entries);
+    rc = transmitIr(IR_DEVICE, LG_IR_BAUD_RATE, carrierFreq, const_cast<int32_t*>(pattern.data()), sizeof(int32_t) * entries);
+    if (rc != IR_SUCCESS) {
+        ALOGE("transmitIr() failed, error %d\n", rc);
+        return false;
+    }
+    return true;
 }
 
 Return<void> ConsumerIr::getCarrierFreqs(getCarrierFreqs_cb _hidl_cb) {
